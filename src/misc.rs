@@ -40,17 +40,10 @@ fn test_determinant() {
 
 #[inline(always)]
 pub fn transpose<T: Num>(out: &mut [T; 4], a: [T; 4]) -> &mut [T; 4] {
-    if *out == a {
-        let tmp = a[1];
-        out[1] = a[2];
-        out[2] = tmp;
-    } else {
-        out[0] = a[0];
-        out[1] = a[2];
-        out[2] = a[1];
-        out[3] = a[3];
-    }
-
+    out[0] = a[0];
+    out[1] = a[2];
+    out[2] = a[1];
+    out[3] = a[3];
     out
 }
 #[test]
