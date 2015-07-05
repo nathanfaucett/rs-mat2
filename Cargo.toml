@@ -3,5 +3,12 @@ name = "mat2"
 version = "0.1.0"
 authors = ["nathanfaucett <nathanfaucett@gmail.com>"]
 
+keywords = ["mat2", "matrix", "2x2", "2"]
+description = "rust matrix 2x2 functions"
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/nathanfaucett/rs-mat2.git"
+homepage = "https://github.com/nathanfaucett/rs-mat2"
+
 [dependencies.num]
 git = "https://github.com/nathanfaucett/rs-num.git"
