@@ -13,6 +13,21 @@ fn test_create() {
 }
 
 #[inline(always)]
+pub fn create_identity<T: Num>() -> [T; 4] {
+    create(
+        T::one(), T::zero(),
+        T::zero(), T::one()
+    )
+}
+#[inline(always)]
+pub fn create_zero<T: Num>() -> [T; 4] {
+    create(
+        T::zero(), T::zero(),
+        T::zero(), T::zero()
+    )
+}
+
+#[inline(always)]
 pub fn clone<T: Num>(m: [T; 4]) -> [T; 4] {create(m[0], m[1], m[2], m[3])}
 
 #[inline(always)]
