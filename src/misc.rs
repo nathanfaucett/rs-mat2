@@ -3,7 +3,7 @@ use set::identity;
 
 
 #[inline(always)]
-pub fn inverse<T: Num>(out: &mut [T; 4], a: [T; 4]) -> &mut [T; 4] {
+pub fn inverse<'a, 'b, T: Num>(out: &'a mut [T; 4], a: &'b [T; 4]) -> &'a mut [T; 4] {
     let m11 = a[0];
     let m12 = a[2];
     let m21 = a[1];
@@ -25,21 +25,21 @@ pub fn inverse<T: Num>(out: &mut [T; 4], a: [T; 4]) -> &mut [T; 4] {
 #[test]
 fn test_inverse() {
     let mut v = [0, 0, 0, 0];
-    inverse(&mut v, [1, 0, 0, 1]);
+    inverse(&mut v, &[1, 0, 0, 1]);
     assert!(v == [1, 0, 0, 1]);
 }
 
 #[inline(always)]
-pub fn determinant<T: Num>(out: [T; 4]) -> T {
+pub fn determinant<'a, 'b, T: Num>(out: &'b [T; 4]) -> T {
     out[0] * out[3] - out[2] * out[1]
 }
 #[test]
 fn test_determinant() {
-    assert_eq!(determinant([1, 0, 0, 1]), 1);
+    assert_eq!(determinant(&[1, 0, 0, 1]), 1);
 }
 
 #[inline(always)]
-pub fn transpose<T: Num>(out: &mut [T; 4], a: [T; 4]) -> &mut [T; 4] {
+pub fn transpose<'a, 'b, T: Num>(out: &'a mut [T; 4], a: &'b [T; 4]) -> &'a mut [T; 4] {
     out[0] = a[0];
     out[1] = a[2];
     out[2] = a[1];
@@ -49,6 +49,6 @@ pub fn transpose<T: Num>(out: &mut [T; 4], a: [T; 4]) -> &mut [T; 4] {
 #[test]
 fn test_transpose() {
     let mut v = [0, 0, 0, 0];
-    transpose(&mut v, [1, 0, 0, 1]);
+    transpose(&mut v, &[1, 0, 0, 1]);
     assert_eq!(v, [1, 0, 0, 1]);
 }
