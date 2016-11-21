@@ -2,6 +2,7 @@
 
 
 extern crate num;
+extern crate approx;
 
 
 pub mod create;
