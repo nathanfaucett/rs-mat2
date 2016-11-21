@@ -1,11 +1,11 @@
-use num::Num;
+use num::{Signed, Unsigned};
 use approx::Approx;
 
 use set::identity;
 
 
 #[inline(always)]
-pub fn inverse<'a, 'b, T: Num>(out: &'a mut [T; 4], a: &'b [T; 4]) -> &'a mut [T; 4] {
+pub fn inverse<'a, 'b, T: Signed>(out: &'a mut [T; 4], a: &'b [T; 4]) -> &'a mut [T; 4] {
     let m11 = a[0];
     let m12 = a[2];
     let m21 = a[1];
@@ -32,7 +32,7 @@ fn test_inverse() {
 }
 
 #[inline(always)]
-pub fn determinant<'a, 'b, T: Num>(out: &'b [T; 4]) -> T {
+pub fn determinant<'a, 'b, T: Unsigned>(out: &'b [T; 4]) -> T {
     out[0] * out[3] - out[2] * out[1]
 }
 #[test]
@@ -41,7 +41,7 @@ fn test_determinant() {
 }
 
 #[inline(always)]
-pub fn transpose<'a, 'b, T: Num>(out: &'a mut [T; 4], a: &'b [T; 4]) -> &'a mut [T; 4] {
+pub fn transpose<'a, 'b, T: Unsigned>(out: &'a mut [T; 4], a: &'b [T; 4]) -> &'a mut [T; 4] {
     out[0] = a[0];
     out[1] = a[2];
     out[2] = a[1];
@@ -57,19 +57,19 @@ fn test_transpose() {
 
 
 #[inline(always)]
-pub fn eq<'a, T: Num>(a: &'a [T; 4], b: &'a [T; 4]) -> bool {
-    !nq(a, b)
+pub fn eq<'a, T: Unsigned>(a: &'a [T; 4], b: &'a [T; 4]) -> bool {
+    !ne(a, b)
 }
 
 #[inline(always)]
-pub fn nq<'a, T: Num>(a: &'a [T; 4], b: &'a [T; 4]) -> bool {
+pub fn ne<'a, T: Unsigned>(a: &'a [T; 4], b: &'a [T; 4]) -> bool {
     !a[0].approx_eq(b[0]) ||
     !a[1].approx_eq(b[1]) ||
     !a[2].approx_eq(b[2]) ||
     !a[3].approx_eq(b[3])
 }
 #[test]
-fn test_nq() {
-    assert_eq!(nq(&[1f32, 1f32, 1f32, 1f32], &[1f32, 1f32, 1f32, 1f32]), false);
-    assert_eq!(nq(&[0f32, 0f32, 0f32, 0f32], &[1f32, 1f32, 1f32, 1f32]), true);
+fn test_ne() {
+    assert_eq!(ne(&[1f32, 1f32, 1f32, 1f32], &[1f32, 1f32, 1f32, 1f32]), false);
+    assert_eq!(ne(&[0f32, 0f32, 0f32, 0f32], &[1f32, 1f32, 1f32, 1f32]), true);
 }
