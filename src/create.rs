@@ -1,10 +1,10 @@
-use num::Unsigned;
+use num::Num;
 
 
-#[inline(always)]
-pub fn new<T: Unsigned>(m11: T, m12: T, m21: T, m22: T) -> [T; 4] {[m11, m12, m21, m22]}
-#[inline(always)]
-pub fn create<T: Unsigned>(m11: T, m12: T, m21: T, m22: T) -> [T; 4] {new(m11, m12, m21, m22)}
+#[inline]
+pub fn new<T: Num>(m11: T, m12: T, m21: T, m22: T) -> [T; 4] {[m11, m12, m21, m22]}
+#[inline]
+pub fn create<T: Num>(m11: T, m12: T, m21: T, m22: T) -> [T; 4] {new(m11, m12, m21, m22)}
 #[test]
 fn test_new() {
     let m = new(1, 0, 0, 1);
@@ -14,26 +14,26 @@ fn test_new() {
     assert!(m[3] == 1);
 }
 
-#[inline(always)]
-pub fn new_identity<T: Unsigned>() -> [T; 4] {
+#[inline]
+pub fn new_identity<T: Num>() -> [T; 4] {
     new(
         T::one(), T::zero(),
         T::zero(), T::one()
     )
 }
-#[inline(always)]
-pub fn new_zero<T: Unsigned>() -> [T; 4] {
+#[inline]
+pub fn new_zero<T: Num>() -> [T; 4] {
     new(
         T::zero(), T::zero(),
         T::zero(), T::zero()
     )
 }
 
-#[inline(always)]
-pub fn clone<'b, T: Unsigned>(m: &'b [T; 4]) -> [T; 4] {new(m[0], m[1], m[2], m[3])}
+#[inline]
+pub fn clone<'b, T: Num>(m: &'b [T; 4]) -> [T; 4] {new(m[0], m[1], m[2], m[3])}
 
-#[inline(always)]
-pub fn copy<'a, 'b, T: Unsigned>(out: &'a mut [T; 4], a: &'b [T; 4]) -> &'a mut [T; 4] {
+#[inline]
+pub fn copy<'a, 'b, T: Num>(out: &'a mut [T; 4], a: &'b [T; 4]) -> &'a mut [T; 4] {
     out[0] = a[0];
     out[1] = a[1];
     out[2] = a[2];
