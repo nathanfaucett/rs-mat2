@@ -3,7 +3,7 @@ use signed::Signed;
 
 
 #[inline]
-pub fn set_rotation<'a, 'b, T: Signed>(out: &'a mut [T; 4], angle: T) -> &'a mut [T; 4] {
+pub fn set_rotation<'a, 'b, T: Copy + Signed>(out: &'a mut [T; 4], angle: T) -> &'a mut [T; 4] {
     let c = angle.cos();
     let s = angle.sin();
 
@@ -29,7 +29,7 @@ fn test_set_rotation() {
 }
 
 #[inline]
-pub fn get_rotation<'a, 'b, T: Num>(out: &'b [T; 4]) -> T {
+pub fn get_rotation<'a, 'b, T: Copy + Num>(out: &'b [T; 4]) -> T {
     out[1].atan2(&out[0])
 }
 #[test]
@@ -44,7 +44,7 @@ fn test_get_rotation() {
 }
 
 #[inline]
-pub fn rotate<'a, 'b, T: Signed>(out: &'a mut [T; 4], a: &'b [T; 4], angle: T) -> &'a mut [T; 4] {
+pub fn rotate<'a, 'b, T: Copy + Signed>(out: &'a mut [T; 4], a: &'b [T; 4], angle: T) -> &'a mut [T; 4] {
     let m11 = a[0];
     let m12 = a[2];
     let m21 = a[1];

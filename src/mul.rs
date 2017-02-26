@@ -2,7 +2,7 @@ use num::Num;
 
 
 #[inline]
-pub fn mul<'a, 'b, T: Num>(out: &'a mut [T; 4], a: &'b [T; 4], b: &'b [T; 4]) ->  &'a mut [T; 4] {
+pub fn mul<'a, 'b, T: Copy + Num>(out: &'a mut [T; 4], a: &'b [T; 4], b: &'b [T; 4]) ->  &'a mut [T; 4] {
     let a11 = a[0];
     let a12 = a[2];
     let a21 = a[1];
@@ -30,7 +30,7 @@ fn test_mul() {
 }
 
 #[inline]
-pub fn smul<'a, 'b, T: Num>(out: &'a mut [T; 4], a: &'b [T; 4], s: T) ->  &'a mut [T; 4] {
+pub fn smul<'a, 'b, T: Copy + Num>(out: &'a mut [T; 4], a: &'b [T; 4], s: T) ->  &'a mut [T; 4] {
     out[0] = a[0] * s;
     out[1] = a[1] * s;
     out[2] = a[2] * s;
